@@ -4,6 +4,7 @@ import RegisterView from '../views/RegisterView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import PlayersView from '../views/PlayersView.vue'
 import PlayerInfoView from '../views/PlayerInfoView.vue'
+import ShopView from '../views/ShopView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/playerInfo',
       name: 'playerInfo',
       component: PlayerInfoView
+    },
+    {
+      path: '/shop',
+      name: 'shop',
+      component: ShopView
     }
   ]
 })
