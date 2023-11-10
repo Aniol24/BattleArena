@@ -1,4 +1,6 @@
 <script setup>
+import { RouterLink } from 'vue-router';
+
 //import { RouterLink, RouterView } from 'vue-router'
 </script>
 
@@ -9,6 +11,7 @@
     <RouterLink to="/register">register</RouterLink>
     <RouterLink to="/profile">Profile</RouterLink>
     <RouterLink to="/players">Players</RouterLink>
+    <RouterLink to="/playerInfo">Player Info</RouterLink>"
   </nav>
 
   <RouterView />
