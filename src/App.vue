@@ -16,6 +16,7 @@ import { RouterLink } from 'vue-router';
     <RouterLink to="/sellAttack">Sell Attack</RouterLink>
     <RouterLink to="/createAttack">Create Attack</RouterLink>
     <RouterLink to="/arena">Arena</RouterLink>
+    <RouterLink to="/gameRecord">Game Record</RouterLink>
   </nav>
 
   <RouterView />
