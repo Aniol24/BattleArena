@@ -5,17 +5,14 @@ import NavBar from '../components/NavBar.vue'
 </script>
 
 <template>
-
   <NavBar/>
   <div class="contenidor-centrat">
-    <AttacksBox />
     <UserBox/>
+    <AttacksBox />
   </div>
-
 </template>
 
 <style scoped>
-
   .contenidor-centrat{
     display: flex;
     justify-content: center;
@@ -23,11 +20,18 @@ import NavBar from '../components/NavBar.vue'
     gap: 80px;
   }
 
+  @media (max-width: 768px) {
+    .contenidor-centrat {
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+  }
 </style>
 
 <style>
-
-body{
-  background-color: #ADC178;
-}
+  body{
+    background-color: #ADC178;
+  }
 </style>

@@ -14,7 +14,6 @@ import GamesFinishedBox from '../components/GamesFinishedBox.vue';
 </template>
 
 <style scoped>
-
   .contenidor-centrat{
     display: flex;
     justify-content: center;
@@ -22,6 +21,14 @@ import GamesFinishedBox from '../components/GamesFinishedBox.vue';
     gap: 80px;
   }
 
+  @media (max-width: 768px) {
+    .contenidor-centrat {
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      margin-top: 40px;
+    }
+  }
 </style>
 
 <style>

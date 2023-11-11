@@ -2,6 +2,7 @@
 import NavBar from '../components/NavBar.vue'
 import ShopNav from '../components/ShopNav.vue'
 import Attack from '../components/AttacksShopBox.vue'
+import UserBox from '../components/UserBox.vue'
 </script>
 
 <template>

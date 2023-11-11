@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <nav class="navbar">
-        <ul class="nav-list">
+        <ul :class="{ 'nav-list': true, 'active': isMenuOpen }">
             <li class="nav-item lletra"><a href="#home" class="nav-link">Profile</a></li>
             <li class="nav-item lletra"><a href="#about" class="nav-link">Arenas</a></li>
             <li class="nav-item lletra"><a href="#services" class="nav-link">Players</a></li>
@@ -19,7 +19,7 @@
   };
   </script>
   
-  <style scoped>
+<style scoped>
 
     .header{
         background: #000;
@@ -77,5 +77,44 @@
         font-size: 1.7em;
         margin-right: 10px;
     }
+
+    @media screen and (max-width: 700px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .nav-item {
+      margin: 5px 0;
+      width: 100%;
+    }
+
+    .nav-link {
+      padding: 8px;
+      text-align: left;
+    }
+
+    .nav-title {
+      font-size: 1.4em;
+      margin-right: 0;
+      margin-bottom: 10px;
+      width: 100%;
+      text-align: center; 
+    }
+
+    .hamburger-menu {
+      display: block;
+    }
+  }
+
+  .hamburger-menu {
+    display: none;
+  }
   </style>
   

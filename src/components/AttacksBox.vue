@@ -21,42 +21,51 @@ import Attack from './AttackComponent.vue'
 </template>
 
 <style scoped>
-    .title {
-        font-family: 'Daydream';
-    }
+  .title {
+    font-family: 'Daydream';
+  }
 
+  .box {
+    font-family: 'DigitalDisco', sans-serif;
+    width: 1000px; /* Ancho predeterminado */
+    padding: 20px;
+    background-color: #DDE5B6;
+    border-radius: 30px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .caixa-atacs {
+    display: flex;
+    flex-direction: column;
+    max-height: 390px;
+    overflow-y: auto;
+  }
+
+  /* Estilos para la barra de desplazamiento */
+  .caixa-atacs::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .caixa-atacs::-webkit-scrollbar-track {
+    background: #DDE5B6;
+    border-radius: 10px;
+  }
+
+  .caixa-atacs::-webkit-scrollbar-thumb {
+    background-color: #DDE5B6;
+    border-radius: 20px; 
+    border: 3px solid #507229;
+  }
+
+  .caixa-atacs::-webkit-scrollbar-thumb:hover {
+    background-color: #DDE5B6; 
+  }
+
+  
+  @media (max-width: 768px) {
     .box {
-        font-family: 'DigitalDisco', sans-serif;
-        width: 900px;
-        padding: 20px;
-        background-color: #DDE5B6;
-        border-radius: 30px;
-        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+      width: auto;
+      margin: 10px; 
     }
-
-    .caixa-atacs {
-        display: flex;
-        flex-direction: column;
-        max-height: 390px;
-        overflow-y: auto;
-    }
-
-    .caixa-atacs::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    .caixa-atacs::-webkit-scrollbar-track {
-        background: #DDE5B6;
-        border-radius: 10px;
-    }
-
-    .caixa-atacs::-webkit-scrollbar-thumb {
-        background-color: #DDE5B6;
-        border-radius: 20px; 
-        border: 3px solid #507229;
-    }
-
-    .caixa-atacs::-webkit-scrollbar-thumb:hover {
-        background-color: #DDE5B6; 
-    }
+  }
 </style>
