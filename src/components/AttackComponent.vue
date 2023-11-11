@@ -22,13 +22,12 @@
 </template>
     
 <style scoped>
-    
-    .title{
+    .title {
         font-family: 'Daydream';
     }
     
     .attack {
-        font-family:'DigitalDisco', sans-serif;
+        font-family: 'DigitalDisco', sans-serif;
         width: auto;
         height: 100px;
         padding: 10px;
@@ -38,17 +37,32 @@
         margin-top: 10px;
     }
 
-    .contingut-atac{
+    .contingut-atac {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
     }
 
-    .stats-atack{
+    .stats-atack {
         display: flex;
         flex-direction: column;
         justify-content: center;
     }
-    
+
+    @media (max-width: 600px) {
+        .contingut-atac {
+            flex-direction: column;
+            align-items: start;
+        }
+
+        .attack {
+            height: auto; 
+            padding: 20px;
+        }
+
+        .stats-atack {
+            margin-bottom: 10px;    
+        }
+    }
 </style>
