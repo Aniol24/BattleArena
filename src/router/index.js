@@ -5,6 +5,8 @@ import ProfileView from '../views/ProfileView.vue'
 import PlayersView from '../views/PlayersView.vue'
 import PlayerInfoView from '../views/PlayerInfoView.vue'
 import ShopView from '../views/ShopView.vue'
+import SellAttackView from '../views/SellAttackView.vue'
+import CreateAttackView from '../views/CreateAttackView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +40,16 @@ const router = createRouter({
       path: '/shop',
       name: 'shop',
       component: ShopView
+    },
+    {
+      path: '/sellAttack',
+      name: 'sellAttack',
+      component: SellAttackView
+    },
+    {
+      path: '/createAttack',
+      name: 'createAttack',
+      component: CreateAttackView
     }
   ]
 })
