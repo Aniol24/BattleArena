@@ -9,6 +9,7 @@ import SellAttackView from '../views/SellAttackView.vue'
 import CreateAttackView from '../views/CreateAttackView.vue'
 import ArenaView from '../views/ArenaView.vue'
 import GameRecordBox from '../components/GameRecordBox.vue'
+import BattleArena from '../views/BattleArena.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,7 +63,13 @@ const router = createRouter({
       path: '/gameRecord',
       name: 'gameRecord',
       component: GameRecordBox
+    },
+    {
+      path: '/battlearena',
+      name: 'battlearena',
+      component: BattleArena
     }
+    
   ]
 })
 
