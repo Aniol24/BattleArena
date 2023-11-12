@@ -17,11 +17,12 @@ import Team from './TeamComponent.vue'
 <style scoped>
   .title {
     font-family: 'Daydream';
+    text-align: center;
   }
 
   .box {
     font-family: 'DigitalDisco', sans-serif;
-    width: 1000px; /* Ancho predeterminado */
+    width: fit-content;
     padding: 20px;
     background-color: #DDE5B6;
     border-radius: 30px;
@@ -32,7 +33,6 @@ import Team from './TeamComponent.vue'
     display: flex;
     flex-direction: row;
     max-height: 390px;
-    overflow-y: auto;
     gap: 30px; 
   }  
   @media (max-width: 768px) {

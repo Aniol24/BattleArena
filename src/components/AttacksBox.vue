@@ -27,7 +27,7 @@ import Attack from './AttackComponent.vue'
 
   .box {
     font-family: 'DigitalDisco', sans-serif;
-    width: 1000px; /* Ancho predeterminado */
+    width: 1000px;
     padding: 20px;
     background-color: #DDE5B6;
     border-radius: 30px;
@@ -37,11 +37,10 @@ import Attack from './AttackComponent.vue'
   .caixa-atacs {
     display: flex;
     flex-direction: column;
-    max-height: 390px;
+    max-height: 500px;
     overflow-y: auto;
   }
 
-  /* Estilos para la barra de desplazamiento */
   .caixa-atacs::-webkit-scrollbar {
     width: 10px;
   }

@@ -6,11 +6,11 @@
             <h4 class="title">(P.A) Name</h4>
 
             <div class="stats-atac">
-                <button type="button">Add Price</button>
+                <button class="btn">Add Price</button>
             </div>
 
             <div class="stats-atac">
-                <button type="button">Sell</button>
+                <button class="btn">Sell</button>
             </div>
         </div>
 
@@ -46,22 +46,20 @@
         flex-direction: column;
         justify-content: center;
     }
-    button {
+    .btn {
         font-family:'Daydream', sans-serif;
-        width: 100%;
         padding: 10px;
-        margin-top: 10px;
         background-color: #6C584C;
         color: #DDE5B6;
         border: none;
         border-radius: 4px;
         cursor: pointer;
         font-size: 16px;
+        margin: 10px;
         transition: background-color 0.3s ease-in-out;
     }
-    
-    button:hover {
-        background-color: #32471a;
-        
+
+    .btn:hover{
+        background-color: #57473d;   
     }
 </style>

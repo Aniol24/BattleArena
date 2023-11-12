@@ -1,55 +1,33 @@
 <template>
-
-    <nav class= "navbar">
-        <ul class= "nav-list">
-            <li class="nav-item lletra"><a href="#create" class="nav-link">Create Attack</a></li>
-            <li class="nav-item lletra"><a href="#sell" class="nav-link">Sell Attack</a></li>
-        </ul>
-    </nav>
+    <div class="button-container">
+        <button class="btn">Create Attack</button>
+        <button class="btn">Sell Attack</button>
+    </div>
 </template>
 
-<script>
-  export default {
-    name: 'ShopNav',
-  };
-  </script>
-
 <style scoped>
-    .lletra{
-        font-family:'DigitalDisco', sans-serif;
-        text-align: center;
-        font-size: 1em;
-        color: #507229
-    }
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #ADC178;
-        padding: 20px 30px;
-    }
-
-    .nav-list {
-        list-style-type: none;
-        display: flex;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .nav-item {
-        margin: 0 10px;
-    }
-    
-    .nav-link {
-        color: #283618;
-        text-decoration: none;
+    .btn {
+        font-family:'Daydream', sans-serif;
+        width: 50%;
         padding: 10px;
-    }
-    
-    .nav-link:hover {
-        background-color: #283618;
-        color: black;
+        background-color: #6C584C;
+        color: #DDE5B6;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 10px;
+        transition: background-color 0.3s ease-in-out;
     }
 
-  </style>
-  
+    .btn:hover{
+        background-color: #57473d;   
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+</style>

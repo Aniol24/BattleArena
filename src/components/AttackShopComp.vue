@@ -6,12 +6,12 @@
             <h4 class="title">Attack Name</h4>
 
             <div class="stats-atac">
-                <h4>Buy  </h4>
+                <h4>Price(co)  </h4>
                 <h4>Player Name:  </h4>
             </div>
 
             <div class="stats-atac">
-                <h4>Price(co)  </h4>
+                <h4>Buy  </h4>
             </div>
         </div>
 

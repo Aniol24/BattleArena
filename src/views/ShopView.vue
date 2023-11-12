@@ -2,16 +2,18 @@
 import NavBar from '../components/NavBar.vue'
 import ShopNav from '../components/ShopNav.vue'
 import Attack from '../components/AttacksShopBox.vue'
-import UserBox from '../components/UserBox.vue'
 </script>
 
 <template>
 
     <NavBar/>
-    <ShopNav/>
     <div class="contenidor-centrat">
       <Attack/>
     </div>
+    <div class="contenidor-nav">
+      <ShopNav/>
+    </div>
+    
 </template>
 
 <style scoped>
@@ -21,6 +23,13 @@ import UserBox from '../components/UserBox.vue'
     justify-content: center;
     margin-top: 80px;
     gap: 80px;
+  }
+
+  .contenidor-nav{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    
   }
 
 </style>

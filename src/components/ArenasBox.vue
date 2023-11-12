@@ -17,7 +17,7 @@ import Arena from './ArenaComponent.vue'
 <style scoped>
     .box {
         font-family: 'DigitalDisco', sans-serif;
-        width: 900px;
+        width: 70%;
         padding: 20px;
         background-color: #DDE5B6;
         border-radius: 30px;
@@ -27,7 +27,7 @@ import Arena from './ArenaComponent.vue'
     .caixa-atacs {
         display: flex;
         flex-direction: column;
-        max-height: 390px;
+        max-height: 500px;
         overflow-y: auto;
     }
 

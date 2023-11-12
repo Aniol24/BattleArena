@@ -1,6 +1,6 @@
 <script setup>
 import NavBar from '../components/NavBar.vue'
-import Attack from '../components/CreateAttackBox.vue'
+import CreateAttack from '../components/CreateAttackBox.vue'
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import Attack from '../components/CreateAttackBox.vue'
     <NavBar/>
     <h3 class="title">Create Attack</h3>
     <div class="contenidor-centrat">
-      <Attack/>
+      <CreateAttack/>
     </div>
 </template>
 

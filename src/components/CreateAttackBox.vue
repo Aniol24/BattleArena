@@ -2,7 +2,7 @@
 
     <div class="box">
 
-        <h4 class="text">Introduce the attack name: </h4>
+        <h4 class="text">Attack Name:</h4>
 
         <h4 class="text">Posiciones sobre la dirección del array (x, y): </h4>
         

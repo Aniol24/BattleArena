@@ -29,14 +29,14 @@ import Arenas from '../components/ArenasBox.vue'
         flex-wrap: wrap; 
         justify-content:center;
         align-items: center; 
-        margin-top: 80px;
+        margin-top: 20px;
         gap: 80px;
     }
     .contenidor-start{
         display: flex;
         flex-direction: row;
         flex-wrap: wrap; 
-        justify-content:space-around;
+        justify-content:center;
         align-items: center; 
         margin-top: 80px;
         gap: 10px;
@@ -45,16 +45,13 @@ import Arenas from '../components/ArenasBox.vue'
         display: flex;
         flex-direction: row;
         flex-wrap: wrap; 
-        justify-content:space-around;
-        align-items: right; 
-        margin-top: 80px;
-        gap: 10px;
+        justify-content:center; 
+        margin-top: 20px;
     }
     .button {
         font-family:'Daydream', sans-serif;
-        width: 25%;
+        width: auto;
         padding: 10px;
-        margin-top: 10px;
         background-color: #6C584C;
         color: #DDE5B6;
         border: none;
@@ -65,9 +62,9 @@ import Arenas from '../components/ArenasBox.vue'
     }
     .filter {
         font-family:'Daydream', sans-serif;
-        width: 25%;
+        width: auto;
+        margin-left: 10px;
         padding: 10px;
-        margin-top: 10px;
         background-color: #DDE5B6;
         color: #6C584C;
         border: none;
@@ -77,7 +74,11 @@ import Arenas from '../components/ArenasBox.vue'
         transition: background-color 0.3s ease-in-out;
     }
     button:hover {
-        background-color: #32471a;    
+        background-color: #57473d;    
+    }
+
+    .filter:hover{
+        background-color: #f3ffb1;   
     }
 </style>
 

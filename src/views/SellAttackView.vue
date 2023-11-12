@@ -1,14 +1,13 @@
 <script setup>
 import NavBar from '../components/NavBar.vue'
-import Attack from '../components/SellAttackBox.vue'
+import AttacksBox from '../components/SellAttackBox.vue'
 </script>
 
 <template>
 
     <NavBar/>
-    <h3 class="title">Personal Attacks (P.A)</h3>
     <div class="contenidor-centrat">
-      <Attack/>
+      <AttacksBox/>
     </div>
 </template>
 
