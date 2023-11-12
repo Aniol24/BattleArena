@@ -38,7 +38,7 @@ import Arenas from '../components/ArenasBox.vue'
         flex-wrap: wrap; 
         justify-content:center;
         align-items: center; 
-        margin-top: 80px;
+        margin-top: 40px;
         gap: 10px;
     }
     .create{
@@ -80,6 +80,7 @@ import Arenas from '../components/ArenasBox.vue'
     .filter:hover{
         background-color: #f3ffb1;   
     }
+
 </style>
 
 <style>

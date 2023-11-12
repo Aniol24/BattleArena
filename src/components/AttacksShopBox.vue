@@ -62,7 +62,7 @@ import Attack from './AttackShopComp.vue'
   
   @media (max-width: 768px) {
     .box {
-      width: auto + 10px;
+      width: 85%;
       margin: 10px; 
     }
   }

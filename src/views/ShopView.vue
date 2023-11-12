@@ -32,6 +32,22 @@ import Attack from '../components/AttacksShopBox.vue'
     
   }
 
+  @media (max-width: 768px) {
+    .contenidor-centrat {
+      flex-direction: column;
+      margin-top: 40px;
+      gap: 40px;
+    }
+
+    .contenidor-nav {
+      flex-direction: column;
+    }
+
+    body {
+      font-size: 14px;
+    }
+  }
+
 </style>
 
 <style>

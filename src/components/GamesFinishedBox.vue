@@ -57,4 +57,10 @@ import Game from './GameFinishedComponent.vue'
     .caixa-games::-webkit-scrollbar-thumb:hover {
         background-color: #DDE5B6; 
     }
+
+    @media (max-width: 768px) {
+        .box{
+            width: 85%;
+        }
+    }
 </style>

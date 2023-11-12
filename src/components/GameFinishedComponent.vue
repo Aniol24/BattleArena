@@ -50,5 +50,23 @@
         flex-direction: column;
         justify-content: center;
     }
+
+    @media (max-width: 768px) {
+        .contingut-game{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .stats-game{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        h4{
+            margin-left: 10px;
+        }
+    }
     
 </style>

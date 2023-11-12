@@ -7,12 +7,12 @@
             <h4 class="title">Arena Name</h4>
 
             <div class="stats-atac">
-                <h4>10hp:  </h4>
+                <h4>Health: 10hp</h4>
                 <h4>Player1 vs Player2  </h4>
             </div>
 
             <div class="stats-atac">
-                <h4>Size:  </h4>
+                <h4>Size:  4x4</h4>
             </div>
         </div>
 
@@ -29,7 +29,7 @@
     .arena {
         font-family:'DigitalDisco', sans-serif;
         width: auto;
-        height: 100px;
+        height: auto;
         padding: 10px;
         background-color: #A98467;
         border-radius: 20px;
@@ -48,6 +48,18 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    @media (max-width: 768px) {
+        .contingut-atac{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stats-atack{
+            display: flex;
+            flex-direction: row;
+        }
     }
     
 </style>

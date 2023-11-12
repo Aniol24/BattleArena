@@ -63,8 +63,9 @@ import Attack from './AttackComponent.vue'
   
   @media (max-width: 768px) {
     .box {
-      width: auto;
+      width: 85%;
       margin: 10px; 
     }
+
   }
 </style>

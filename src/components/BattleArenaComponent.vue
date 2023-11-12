@@ -106,5 +106,17 @@ export default {
 .vertical-border-dre {
   background-image: url('../assets/imgs/dre.png');
 }
+
+
+@media (max-width: 768px) {
+  .arena{
+    display: grid;
+    width: 100%;
+    height: 350px;
+    grid-template-rows: repeat(var(--rows), 1fr);
+    grid-template-columns: repeat(var(--columns), 1fr);
+    overflow: auto;
+  }
+}
 </style>
 

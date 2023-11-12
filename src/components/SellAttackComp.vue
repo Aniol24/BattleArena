@@ -1,31 +1,24 @@
 <template>
-
     <div class="attack">
-
         <div class="contingut-atac">
             <h4 class="title">(P.A) Name</h4>
-
             <div class="stats-atac">
                 <button class="btn">Add Price</button>
             </div>
-
             <div class="stats-atac">
                 <button class="btn">Sell</button>
             </div>
         </div>
-
     </div>
-    
 </template>
 
 <style scoped>
-    
     .title{
         font-family: 'Daydream';
     }
     
     .attack {
-        font-family:'DigitalDisco', sans-serif;
+        font-family: 'DigitalDisco', sans-serif;
         width: auto;
         height: 100px;
         padding: 10px;
@@ -47,7 +40,7 @@
         justify-content: center;
     }
     .btn {
-        font-family:'Daydream', sans-serif;
+        font-family: 'Daydream', sans-serif;
         padding: 10px;
         background-color: #6C584C;
         color: #DDE5B6;
@@ -61,5 +54,13 @@
 
     .btn:hover{
         background-color: #57473d;   
+    }
+
+    @media (max-width: 768px) {
+        .btn {
+            font-size: 14px;
+            padding: 8px;
+            margin: 5px;
+        }
     }
 </style>
