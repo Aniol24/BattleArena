@@ -1,11 +1,15 @@
 <template>
 
     <div class="box">
+        <div>
+            <label for="inputName">Attack Name: </label>
+            <input type="text" id="inputName">
+        </div>
 
-        <h4 class="text">Attack Name:</h4>
-
-        <h4 class="text">Posiciones sobre la dirección del array (x, y): </h4>
-        
+        <div>
+            <label for="inputPos">Posiciones sobre la dirección del array (x, y): </label>
+            <input type="text" id="inputPos">
+        </div>
         <button type="button">Add Attack</button>
     </div>
 
@@ -30,7 +34,8 @@
 
     button {
         font-family:'Daydream', sans-serif;
-        width: 100%;
+        width: 25%;
+        float: right;
         padding: 10px;
         margin-top: 10px;
         background-color: #6C584C;
