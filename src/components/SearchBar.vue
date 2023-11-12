@@ -27,8 +27,8 @@
   outline: none; 
 }
 
-.search-bar input::placeholder { /* Style for the placeholder text */
-  color: #000; /* Black color for the placeholder */
+.search-bar input::placeholder {
+  color: #000;
 }
 
 .search-icon {
