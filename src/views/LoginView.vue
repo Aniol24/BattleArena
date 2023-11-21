@@ -19,9 +19,3 @@ import LoginBox from '../components/LoginBox.vue'
 }
 
 </style>
-
-<style>
-body{
-    background-color: #ADC178;
-}
-</style>

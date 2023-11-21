@@ -23,4 +23,8 @@ import { RouterLink } from 'vue-router';
   
 </template>
 
-<style scoped></style>
+<style>
+body{
+    background-color: #ADC178;
+}
+</style>

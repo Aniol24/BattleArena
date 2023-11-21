@@ -27,9 +27,3 @@ import AttacksBox from '../components/SellAttackBox.vue'
   }
 
 </style>
-
-<style>
-  body{
-    background-color: #ADC178;
-  }
-</style>

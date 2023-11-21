@@ -29,9 +29,3 @@ import NavBar from '../components/NavBar.vue'
     }
   }
 </style>
-
-<style>
-  body{
-    background-color: #ADC178;
-  }
-</style>

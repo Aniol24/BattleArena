@@ -30,9 +30,3 @@ import GamesFinishedBox from '../components/GamesFinishedBox.vue';
     }
   }
 </style>
-
-<style>
-  body{
-    background-color: #ADC178;
-  }
-</style>

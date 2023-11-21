@@ -19,9 +19,3 @@ import RegisterBox from '../components/RegisterBox.vue'
 }
 
 </style>
-
-<style>
-body{
-    background-color: #ADC178;
-}
-</style>

@@ -82,9 +82,3 @@ import Arenas from '../components/ArenasBox.vue'
     }
 
 </style>
-
-<style>
-    body{
-        background-color: #ADC178;
-    }
-</style>

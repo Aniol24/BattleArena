@@ -49,9 +49,3 @@ import Attack from '../components/AttacksShopBox.vue'
   }
 
 </style>
-
-<style>
-  body{
-    background-color: #ADC178;
-  }
-</style>

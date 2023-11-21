@@ -57,8 +57,3 @@ import SearchBar from '../components/SearchBar.vue'
 </style>
 
 <style>
-
-body{
-  background-color: #ADC178;
-}
-</style>

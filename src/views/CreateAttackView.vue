@@ -22,9 +22,3 @@ import CreateAttack from '../components/CreateAttackBox.vue'
   }
 
 </style>
-
-<style>
-  body{
-    background-color: #ADC178;
-  }
-</style>
