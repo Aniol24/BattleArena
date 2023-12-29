@@ -13,7 +13,9 @@
         <input id="password" type="password" placeholder="Password" v-model="credentials.password"/>
       </div>
       <button type="submit">Create account</button>
-      <p class="register-link">I already have an account</p>
+      <a href="/">
+        <p class="register-link">I already have an account</p>
+      </a>
     </form>
   </div>
 </template>
@@ -54,7 +56,7 @@ export default {
             throw new Error(err.error.message); 
           });
         } else {
-          this.$router.push('/profile');
+          this.$router.push('/');
           return response.json();
         }
       })

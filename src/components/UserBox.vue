@@ -1,17 +1,31 @@
+<script setup>
+
+
+
+</script>
+
 <template>
   <div class="box">
     <div class="contenidor-centrat">
-      <h4 id="id">{{ userData.token }}</h4>
+      <h4 id="id">{{ userData.username }}</h4>
     </div>
 
     <div class="contenidor-centrat">
-      <h4 class="">{{ userData.level }}</h4>
+      <div class="column">
+        <h4 class="">{{userData.level }}</h4>
+        <h4 class="">lvl</h4>
+      </div>
+      
 
       <div class="foto-perfil">
         <img :src="userData.image" alt="Foto de perfil" />
       </div>
-
-      <h4 class="">{{ userData.coins }}</h4>
+      
+      <div class="column">
+        <h4 class="">{{ userData.coins }}</h4>
+        <h4 class="">$$</h4>
+      </div>
+      
     </div>
 
     <div class="contenidor-centrat">
@@ -25,17 +39,19 @@
     <div class="contenidor-centrat">
       <div class="container-files">
         <h4>Games Won</h4>
-        <h4>10</h4>
+        <h4>{{ userData.games_won }}</h4>
       </div>
 
       <div class="container-files">
         <h4>Games Lost</h4>
-        <h4>10</h4>
+        <h4>{{ userData.games_lost }}</h4>
       </div>
     </div>
 
     <div class="contenidor-centrat">
-      <a href="#" @click.prevent="deletePlayer" class="delete-link">Delete player</a>
+      <a href="" @click.prevent="deletePlayer">
+        <p class="delete-link">Delete player</p>
+      </a>
     </div>
 
   </div>
@@ -46,9 +62,18 @@ import * as store from '../store.js';
 
 export default {
   data() {
+    let initialUserData = store.getUserData();
+    // Initialize games_won and games_lost if they don't exist in userData
+    initialUserData.games_won = initialUserData.games_won || 0;
+    initialUserData.games_lost = initialUserData.games_lost || 0;
     return {
       userData: store.getUserData(),
+      games_won: 0,
+      games_lost: 0
     };
+  },
+  mounted() {
+    this.getStatistics();
   },
   methods: {
     deletePlayer() {
@@ -82,12 +107,63 @@ export default {
       .catch(error => {
         this.loginError = error.message;
       });
+    },
+
+    getStatistics(){
+      fetch('https://balandrau.salle.url.edu/i3/players/' + this.userData.username + "/statistics", {
+        method: 'GET',
+        headers: {
+          'Bearer':store.getUserToken(),
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          console.log(response.json());
+          return response.json();
+        }
+      })
+      .then(data => {
+        
+        this.userData.games_won = data.games_won;
+        this.userData.games_lost = data.games_lost;
+      })
+      .catch(error => {
+        console.error("Error fetching statistics:", error.message);
+      });
     }
   }
 };
 </script>
 
 <style scoped>
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:start; 
+  flex-wrap: wrap;
+}
+
+.column h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.column h4 + h4 {
+  margin-top: 5px; /* Adjust the value as needed */
+}
+
+.delete-link {
+  text-align: center;
+  color: #507229;
+}
+
 .foto-perfil {
   width: 130px;
   height: 130px;
@@ -111,7 +187,9 @@ export default {
 
 .foto-perfil img {
   width: 100%;
-  height: auto;
+  height: 100%; 
+  object-fit: cover; 
+  border-radius: 50%; 
 }
 
 .box {

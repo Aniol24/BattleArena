@@ -10,10 +10,10 @@
       <div class="nav-title titol">BATTLE ARENA</div>
 
       <ul :class="{ 'nav-list': true, active: isMenuOpen }">
-        <li class="nav-item lletra"><a href="#home" class="nav-link">Profile</a></li>
-        <li class="nav-item lletra"><a href="#about" class="nav-link">Arenas</a></li>
-        <li class="nav-item lletra"><a href="#services" class="nav-link">Players</a></li>
-        <li class="nav-item lletra"><a href="#contact" class="nav-link">Shop</a></li>
+        <li class="nav-item lletra"><a href="/profile" class="nav-link">Profile</a></li>
+        <li class="nav-item lletra"><a href="/arena" class="nav-link">Arenas</a></li>
+        <li class="nav-item lletra"><a href="/players" class="nav-link">Players</a></li>
+        <li class="nav-item lletra"><a href="/shop" class="nav-link">Shop</a></li>
       </ul>
     </nav>
   </div>

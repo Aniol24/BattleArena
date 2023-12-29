@@ -13,7 +13,10 @@
         <input id="password" type="password" placeholder="Password" v-model="credentials.password" />
       </div>
       <button type="submit">>></button>
-      <p class="register-link">create account</p>
+      
+      <a href="/register">
+          <p class="register-link">create account</p>
+      </a>
     </form>
   </div>
 </template>
