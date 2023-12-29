@@ -10,12 +10,11 @@ import LoginBox from '../components/LoginBox.vue'
 
 <style scoped>
 .columns {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    height: 80vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 80vh;
 }
-
 </style>

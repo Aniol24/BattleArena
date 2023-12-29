@@ -5,47 +5,42 @@ import Attack from '../components/AttacksShopBox.vue'
 </script>
 
 <template>
-
-    <NavBar/>
-    <div class="contenidor-centrat">
-      <Attack/>
-    </div>
-    <div class="contenidor-nav">
-      <ShopNav/>
-    </div>
-    
+  <NavBar />
+  <div class="contenidor-centrat">
+    <Attack />
+  </div>
+  <div class="contenidor-nav">
+    <ShopNav />
+  </div>
 </template>
 
 <style scoped>
+.contenidor-centrat {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  gap: 80px;
+}
 
-  .contenidor-centrat{
-    display: flex;
-    justify-content: center;
-    margin-top: 80px;
-    gap: 80px;
+.contenidor-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+@media (max-width: 768px) {
+  .contenidor-centrat {
+    flex-direction: column;
+    margin-top: 40px;
+    gap: 40px;
   }
 
-  .contenidor-nav{
-    display: flex;
-    flex-direction: row;
-    justify-content:space-around;
-    
+  .contenidor-nav {
+    flex-direction: column;
   }
 
-  @media (max-width: 768px) {
-    .contenidor-centrat {
-      flex-direction: column;
-      margin-top: 40px;
-      gap: 40px;
-    }
-
-    .contenidor-nav {
-      flex-direction: column;
-    }
-
-    body {
-      font-size: 14px;
-    }
+  body {
+    font-size: 14px;
   }
-
+}
 </style>

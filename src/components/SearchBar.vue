@@ -1,16 +1,13 @@
 <template>
   <div class="search-bar">
-    <img src="../assets/imgs/search.png" alt="Search" class="search-icon"/>
-    <input
-      type="text"
-      placeholder="Search..."
-    />
+    <img src="../assets/imgs/search.png" alt="Search" class="search-icon" />
+    <input type="text" placeholder="Search..." />
   </div>
 </template>
 
 <style scoped>
 .search-bar {
-  background-color: #A98467;
+  background-color: #a98467;
   padding: 5px;
   border-radius: 20px;
   display: flex;
@@ -18,13 +15,13 @@
 }
 
 .search-bar input {
-  background-color: transparent; 
+  background-color: transparent;
   padding: 10px;
   margin-right: 5px;
   border: 1px solid transparent;
   border-radius: 5px;
-  color: #000; 
-  outline: none; 
+  color: #000;
+  outline: none;
 }
 
 .search-bar input::placeholder {

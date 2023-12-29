@@ -69,9 +69,7 @@ const router = createRouter({
       name: 'battlearena',
       component: BattleArena
     }
-    
   ]
 })
 
 export default router
-
