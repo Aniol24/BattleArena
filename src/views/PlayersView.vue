@@ -7,27 +7,80 @@ import SearchBar from '../components/SearchBar.vue'
 <template>
   <NavBar />
   <div class="contenidor-start">
-    <SearchBar />
+    <SearchBar @search="handleSearch" />
   </div>
   <div class="contenidor-centrat">
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
-    <Player />
+    <Player v-for="player in filteredPlayers" :key="player.id"
+        :name="player.player_ID"
+        :img="player.img"
+        :xp="player.xp"
+        :level="player.level"
+        :coins="player.coins" />
+    
   </div>
 </template>
+
+<script>
+
+import * as store from '../store.js';
+
+export default {
+
+  data() {
+    return {
+      userData: store.getUserData(),
+      players: [],
+      searchQuery: ''
+    };
+  },
+  computed: {
+    filteredPlayers() {
+      console.log(this.searchQuery);
+      return this.players.filter(player => 
+        player.player_ID.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+  },
+  mounted() {
+    this.getPlayers();
+  },
+  methods: {
+
+    getPlayers() {
+      fetch('https://balandrau.salle.url.edu/i3/players', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          return response.json();
+        }
+      })  
+      .then(data => {
+        this.players = data;
+        console.log(this.players);
+      })
+      .catch(error => {
+        this.loginError = 'Login Failed: ' + error.message; 
+      });
+    },
+    handleSearch(query) {
+      this.searchQuery = query;
+    }
+
+  }
+
+}
+
+</script>
+
 
 <style scoped>
 .contenidor-centrat {

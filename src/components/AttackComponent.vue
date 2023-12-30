@@ -1,23 +1,37 @@
 <template>
   <div class="attack">
     <div class="contingut-atac">
-      <h4 class="title">Attack Name</h4>
+      <h4 class="title">{{ name }}</h4>
 
       <div class="stats-atac">
-        <h4>Power:</h4>
-        <h4>Positions:</h4>
+        <h4>Power: {{ power }}</h4>
+        <h4>Positions: {{ positions }}</h4>
       </div>
 
       <div class="stats-atac">
-        <h4>Equiped:</h4>
-        <h4>On Sale:</h4>
+        <h4>Equiped: {{ equipped ? 'Yes' : 'No' }}</h4>
+        <h4>On Sale: {{ on_sale ? 'Yes' : 'No' }}</h4>
       </div>
     </div>
   </div>
 </template>
 
+<script>
+export default {
+  props: {
+    name: String,
+    power: Number,
+    positions: String,
+    equipped: Boolean,
+    on_sale: Boolean
+  }
+};
+</script>
+
 <style scoped>
 .title {
+  margin-left: 50px;
+  min-width: 400px;
   font-family: 'Daydream';
 }
 
@@ -35,14 +49,12 @@
 .contingut-atac {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: start;
   align-items: center;
 }
 
-.stats-atack {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.stats-atac{
+  min-width: 200px;
 }
 
 @media (max-width: 600px) {
@@ -59,5 +71,11 @@
   .stats-atack {
     margin-bottom: 10px;
   }
+
+  .title {
+  margin-left: 50px;
+  min-width: 50px;
+  font-family: 'Daydream';
+}
 }
 </style>

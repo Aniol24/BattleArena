@@ -1,9 +1,24 @@
 <template>
   <div class="search-bar">
     <img src="../assets/imgs/search.png" alt="Search" class="search-icon" />
-    <input type="text" placeholder="Search..." />
+    <input type="text" placeholder="Search..." v-model="searchQuery" />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      searchQuery: '',
+    };
+  },
+  watch: {
+    searchQuery(newQuery) {
+      this.$emit('search', newQuery);
+    }
+  }
+}
+</script>
 
 <style scoped>
 .search-bar {

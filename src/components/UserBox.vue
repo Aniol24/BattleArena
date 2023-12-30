@@ -1,7 +1,5 @@
 <script setup>
 
-
-
 </script>
 
 <template>
@@ -148,6 +146,8 @@ export default {
   align-items: center;
   justify-content:start; 
   flex-wrap: wrap;
+  min-width: 50px;
+  max-width: 50px;
 }
 
 .column h4 {
@@ -170,6 +170,7 @@ export default {
   border-radius: 50%;
   overflow: hidden;
   position: relative;
+  border : 2px solid black;
 }
 
 .container-files {
@@ -199,6 +200,7 @@ export default {
   background-color: #dde5b6;
   border-radius: 30px;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  max-height: max-content;
 }
 
 .experience-bar {

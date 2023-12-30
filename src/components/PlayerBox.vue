@@ -3,18 +3,31 @@
     <div class="container">
       <div class="container-files">
         <div class="foto-perfil">
-          <img src="../assets/imgs/wizard.png" alt="Foto de perfil" />
+          <img :src="img" alt="" />
         </div>
       </div>
 
       <div class="container-files">
-        <h4>Nom Usuari</h4>
-        <h4>lvl</h4>
-        <h4>coins</h4>
+        <h4>{{ name }}</h4>
+        <h4>lvl: {{ level }} </h4>
+        <h4>Gold: {{ coins }}</h4>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    name: String,
+    img: String,
+    xp: Number,
+    level: Number,
+    coins: Number
+  }
+};
+
+</script>
 
 <style scoped>
 .foto-perfil {
@@ -23,11 +36,16 @@
   border-radius: 50%;
   overflow: hidden;
   position: relative;
+  border : 2px solid black;
+  background-color: #8f9476;
 }
 
 .foto-perfil img {
   width: 100%;
-  height: auto;
+  height: 100%; 
+  object-fit: cover; 
+  border-radius: 50%; 
+  border-color: black;
 }
 
 .container-files {
