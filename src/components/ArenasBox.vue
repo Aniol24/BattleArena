@@ -5,13 +5,72 @@ import Arena from './ArenaComponent.vue'
 <template>
   <div class="box">
     <div class="caixa-atacs">
-      <Arena />
-      <Arena />
-      <Arena />
-      <Arena />
+      <Arena v-for="arena in filteredArenas" :key="arena.id"
+        :name="arena.game_ID"
+        :size="arena.size"
+        :creation_date="arena.creation_date"
+        :finished="arena.finished" 
+        :HP_max="arena.HP_max"
+        :start="arena.start"
+        :players_games="arena.players_games"/>
     </div>
   </div>
 </template>
+
+<script>
+
+import * as store from '../store.js';
+
+export default {
+  props: {
+    searchQuery: String
+  },
+  data() {
+    return {
+      userData: store.getUserData(),
+      arenas: [] 
+    };
+  },
+  mounted() {
+    this.getAttacks();
+  },
+  computed: {
+    filteredArenas() {
+      return this.arenas.filter(arena => 
+        arena.game_ID.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+  },
+  methods: {
+    getAttacks() {
+      fetch('https://balandrau.salle.url.edu/i3/arenas', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          return response.json();
+        }
+      })  
+      .then(data => {
+        this.arenas = data;
+      })
+      .catch(error => {
+        this.loginError = 'Error: ' + error.message; 
+      });
+  }
+}
+
+};
+</script>
+
 
 <style scoped>
 .box {
@@ -27,6 +86,7 @@ import Arena from './ArenaComponent.vue'
   display: flex;
   flex-direction: column;
   max-height: 500px;
+  min-height: 500px;
   overflow-y: auto;
 }
 

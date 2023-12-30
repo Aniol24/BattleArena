@@ -1,13 +1,13 @@
 <script setup>
 import NavBar from '../components/NavBar.vue'
 import ShopNav from '../components/ShopNav.vue'
-import Attack from '../components/AttacksShopBox.vue'
+import AttackBox from '../components/AttacksShopBox.vue'
 </script>
 
 <template>
   <NavBar />
   <div class="contenidor-centrat">
-    <Attack />
+    <AttackBox />
   </div>
   <div class="contenidor-nav">
     <ShopNav />

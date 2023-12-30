@@ -1,21 +1,69 @@
 <template>
   <div class="attack">
     <div class="contingut-atac">
-      <h4 class="title">Attack Name</h4>
+      <h4 class="title">{{ name }}</h4>
 
       <div class="stats-atac">
-        <h4>Price(co)</h4>
-        <h4>Player Name:</h4>
+        <h4>Positions: {{ positions }}</h4>
+        <h4>Power: {{ power }}</h4>
       </div>
 
       <div class="stats-atac">
-        <h4>Buy</h4>
+        <h4>Price: {{ price }}</h4>
+        <h4>lvl: {{ levelNeeded }}</h4>
+      </div>
+
+      <div class="stats-atac">
+        <button class="btn btn-primary" @click="buyAttack">Buy</button>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+
+export default {
+  props: {
+    name: String,
+    power: Number,
+    positions: String,
+    levelNeeded: Number,
+    on_sale: Boolean,
+    price: Number
+  }
+};
+
+</script>
+
 <style scoped>
+
+.btn {
+  font-family: 'Daydream', sans-serif;
+  width: 150px;
+  padding: 10px;
+  background-color: #6c584c;
+  color: #dde5b6;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #57473d;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
 .title {
+  margin-left: 50px;
+  min-width: 400px;
   font-family: 'Daydream';
 }
 
@@ -33,7 +81,7 @@
 .contingut-atac {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: start;
   align-items: center;
 }
 
@@ -43,7 +91,16 @@
   justify-content: center;
 }
 
+.stats-atac{
+  min-width: 200px;
+}
+
 @media (max-width: 600px) {
+
+  .title {
+    font-family: 'Daydream';
+  }
+
   .contingut-atac {
     flex-direction: column;
     align-items: start;

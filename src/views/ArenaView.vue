@@ -7,19 +7,40 @@ import Arenas from '../components/ArenasBox.vue'
 <template>
   <NavBar />
   <div class="contenidor-start">
-    <SearchBar />
+    <SearchBar @search="handleSearch" />
     <button class="filter">Open Arenas</button>
     <button class="filter">Finished Arenas</button>
     <button class="filter">Time</button>
   </div>
 
   <div class="contenidor-centrat">
-    <Arenas />
+    <Arenas :searchQuery="searchQuery" />
   </div>
   <div class="create">
     <button class="button">+Create Arena</button>
   </div>
 </template>
+
+<script>
+
+import * as store from '../store.js';
+
+export default {
+
+  data() {
+    return {
+      searchQuery: ''
+    };
+  },
+  methods: {
+    handleSearch(search) {
+      this.searchQuery = search;
+    },
+  },
+  
+};
+
+</script>
 
 <style scoped>
 .contenidor-centrat {

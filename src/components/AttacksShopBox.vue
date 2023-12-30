@@ -7,13 +7,62 @@ import Attack from './AttackShopComp.vue'
     <h3 class="title">Attacks</h3>
 
     <div class="caixa-atacs">
-      <Attack />
-      <Attack />
-      <Attack />
-      <Attack />
+      <Attack v-for="attack in attacks" :key="attack.attack_ID"
+        :name="attack.attack_ID"
+        :power="attack.power"
+        :positions="attack.positions"
+        :onSale="attack.on_sale" 
+        :levelNeeded="attack.level_needed"
+        :price="attack.price"/>
     </div>
   </div>
 </template>
+
+<script>
+
+import * as store from '../store.js';
+
+export default {
+  
+  data() {
+    return {
+      userData: store.getUserData(),
+      attacks: [] 
+    };
+  },
+  mounted() {
+    this.getAttacks();
+  },
+  methods: {
+    getAttacks() {
+      fetch('https://balandrau.salle.url.edu/i3/shop/attacks', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          return response.json();
+        }
+      })  
+      .then(data => {
+        this.attacks = data;
+        console.log(this.attacks); 
+      })
+      .catch(error => {
+        this.loginError = 'Error: ' + error.message; 
+      });
+    },
+  },
+};
+
+</script>
 
 <style scoped>
 .title {

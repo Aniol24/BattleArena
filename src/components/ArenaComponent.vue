@@ -1,23 +1,42 @@
 <template>
   <div class="arena">
     <div class="contingut-atac">
-      <h4 class="title">Arena Name</h4>
+      <h4 class="title">{{ name }}</h4>
 
       <div class="stats-atac">
-        <h4>Health: 10hp</h4>
-        <h4>Player1 vs Player2</h4>
+        <h4>Health: {{ HP_max }} HP</h4>
+        <h4>{{ players_games[0] ? players_games[0].player_ID : '???' }} VS {{ players_games[1] ? players_games[1].player_ID : '???' }}</h4>
       </div>
 
       <div class="stats-atac">
-        <h4>Size: 4x4</h4>
+        <h4>Size: {{ size }}</h4>
+        <h4>{{ finished ? 'Started' : 'Not Started' }}</h4>
       </div>
     </div>
   </div>
 </template>
 
+<script>
+
+export default {
+  props: {
+    name: String,
+    size: Number,
+    creation_date: String,
+    finished: Boolean,
+    HP_max: Number,
+    start: Boolean,
+    players_games: Array
+  }
+};
+
+</script>
+
 <style scoped>
 .title {
   font-family: 'Daydream';
+  margin-left: 50px;
+  min-width: 400px;
 }
 
 .arena {
@@ -31,10 +50,14 @@
   margin-top: 10px;
 }
 
+.stats-atac{
+  min-width: 200px;
+}
+
 .contingut-atac {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: start;
   align-items: center;
 }
 
