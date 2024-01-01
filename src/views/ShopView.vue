@@ -15,6 +15,42 @@ import AttackBox from '../components/AttacksShopBox.vue'
 </template>
 
 <style scoped>
+
+
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.modal-open {
+  animation: fadeIn 0.5s;
+}
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+  border: #57473d 2px solid;
+  border-radius: 25px;
+  background-color: #dde5b6;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 500px; 
+  font-family: 'DigitalDisco', sans-serif;
+}
+
 .contenidor-centrat {
   display: flex;
   justify-content: center;

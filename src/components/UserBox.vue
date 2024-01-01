@@ -128,7 +128,7 @@ export default {
       .then(data => {
         
         this.userData.games_won = data.games_won;
-        this.userData.games_lost = data.games_lost;
+        this.userData.games_lost = data.games_played - data.games_won;
       })
       .catch(error => {
         console.error("Error fetching statistics:", error.message);

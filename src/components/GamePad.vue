@@ -7,7 +7,7 @@ import Attack from './AttackInGame.vue'
     <div class="capsa">
       <div class="line">
         <h5 class="titol">Attacks</h5>
-        <p>leave arena</p>
+        <p @click="leaveArena" style="cursor: pointer;">leave arena</p>
       </div>
 
       <div class="line">
@@ -47,6 +47,58 @@ import Attack from './AttackInGame.vue'
     </div>
   </div>
 </template>
+
+
+<script>
+
+import * as store from '../store.js';
+
+export default {
+  props: {
+    game_ID: String,
+  },
+  methods: {
+    leaveArena(){
+
+      console.log(this.game_ID);
+
+      fetch('https://balandrau.salle.url.edu/i3/arenas/'+ this.game_ID +'/play', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer': store.getUserToken()
+        }
+      })
+      .then(response => {
+        if (response.ok || response.status === 201) { 
+          console.log(response);
+          if (response.headers.get("Content-Length") === "0" || !response.headers.get("content-type")?.includes("application/json")) {
+            this.$router.push('/arena');
+            return;
+          } else {
+            return response.json();
+          }
+        } else {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        }
+      })
+      .then(data => {
+        if (data) {
+          this.createSuccess = "Arena created successfully!"; // Set success message for JSON response
+        }
+      })
+      .catch(error => {
+        this.createError =  error.message;
+        this.createSuccess = ''; // Clear success message in case of error
+      });
+
+    }
+  }
+}
+
+</script>
 
 <style scoped>
 .box {

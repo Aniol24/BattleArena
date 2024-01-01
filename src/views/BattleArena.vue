@@ -9,9 +9,53 @@ import GamePad from '../components/GamePad.vue'
       <h2 class="arena-title">Arena Name</h2>
       <Arena />
     </div>
-    <GamePad />
+    <GamePad :game_ID="game_ID" />
   </div>
 </template>
+
+<script>
+
+import * as store from '../store.js';
+
+export default {
+  data() {
+    return {
+      game_ID: '', 
+    };
+  },
+  mounted(){
+    this.getGame();
+  },
+  methods:{
+    getGame(){
+      fetch('https://balandrau.salle.url.edu/i3/players/arenas/current', {
+        method: 'GET',
+        headers: {
+          'Bearer':store.getUserToken(),
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          return response.json();
+        }
+      })
+      .then(data => {
+        this.game_ID = data[0].game_ID; 
+        console.log(data[0].game_ID);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }
+  }
+}
+</script>
+
 
 <style scoped>
 .display {
