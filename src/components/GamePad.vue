@@ -60,8 +60,6 @@ export default {
   methods: {
     leaveArena(){
 
-      console.log(this.game_ID);
-
       fetch('https://balandrau.salle.url.edu/i3/arenas/'+ this.game_ID +'/play', {
         method: 'DELETE',
         headers: {
@@ -95,6 +93,8 @@ export default {
       });
 
     }
+
+    
   }
 }
 

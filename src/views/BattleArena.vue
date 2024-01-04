@@ -6,8 +6,8 @@ import GamePad from '../components/GamePad.vue'
 <template>
   <div class="display">
     <div class="arena-container">
-      <h2 class="arena-title">Arena Name</h2>
-      <Arena />
+      <h2 class="arena-title">{{ game_ID }}</h2>
+      <Arena :size="size"/>
     </div>
     <GamePad :game_ID="game_ID" />
   </div>
@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       game_ID: '', 
+      size: 0,
     };
   },
   mounted(){
@@ -46,7 +47,7 @@ export default {
       })
       .then(data => {
         this.game_ID = data[0].game_ID; 
-        console.log(data[0].game_ID);
+        this.size = data[0].size;
       })
       .catch(error => {
         console.log(error);
