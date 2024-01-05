@@ -35,11 +35,16 @@ export default {
   },
   computed: {
     filteredPlayers() {
-      console.log(this.searchQuery);
-      return this.players.filter(player => 
-        player.player_ID.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
-    }
+    return this.players.map(player => {
+      const cleanedName = player.player_ID.replace(/[!*#@{}:+.,_%([$-;=?)\]]/g, ''); // Replace invalid characters including "]"
+      return {
+        ...player,
+        player_ID: cleanedName
+      };
+    }).filter(player => 
+      player.player_ID.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
   },
   mounted() {
     this.getPlayers();

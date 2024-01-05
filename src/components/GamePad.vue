@@ -25,22 +25,22 @@ import Attack from './AttackInGame.vue'
 
     <div class="">
       <div class="direction-line">
-        <button class="image-button">
+        <button class="image-button" @click="move( 'up' )">
           <img src="../assets/imgs/up.png" alt="Button Image" />
         </button>
       </div>
 
       <div class="direction-line">
-        <button class="image-button">
+        <button class="image-button" @click="move('left')">
           <img src="../assets/imgs/left.png" alt="Button Image" />
         </button>
-        <button class="image-button">
+        <button class="image-button" @click="move('right')">
           <img src="../assets/imgs/right.png" alt="Button Image" />
         </button>
       </div>
 
       <div class="direction-line">
-        <button class="image-button">
+        <button class="image-button" @click="move('down')">
           <img src="../assets/imgs/down.png" alt="Button Image" />
         </button>
       </div>
@@ -54,6 +54,7 @@ import Attack from './AttackInGame.vue'
 import * as store from '../store.js';
 
 export default {
+
   props: {
     game_ID: String,
   },
@@ -92,7 +93,36 @@ export default {
         this.createSuccess = ''; // Clear success message in case of error
       });
 
-    }
+    },
+
+    move(direction){
+      const requestBody = {
+        movement: direction,
+      };
+      fetch('https://balandrau.salle.url.edu/i3/arenas/move', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer': store.getUserToken()
+        },
+        body: JSON.stringify(requestBody)
+      })
+      .then(response => {
+        if (response.ok || response.status === 200) { 
+          return response.json();
+        } else {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        }
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+    },
 
     
   }

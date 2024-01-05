@@ -10,7 +10,7 @@
 
       <div class="stats-atac">
         <h4>Size: {{ size }}</h4>
-        <h4>{{ finished ? 'Started' : 'Not Started' }}</h4>
+        <h4>{{ finished ? 'Finished' : 'Not Finished' }}</h4>
       </div>
 
       <div>
@@ -40,8 +40,7 @@ export default {
   },
   data() {
     return {
-      // ... existing data properties
-      errorMessage: '', // New property for error message
+      errorMessage: '', 
       errorMessageVisible: false,
     };
   },
@@ -84,7 +83,7 @@ export default {
     },
     showErrorFlyout() {
 
-    this.errorMessageVisible = true; // Add a new data property 'errorMessageVisible' to control the visibility of the flyout
+    this.errorMessageVisible = true; 
 
     setTimeout(() => {
       this.hideErrorFlyout();
@@ -93,7 +92,7 @@ export default {
 
   hideErrorFlyout() {
 
-    this.errorMessageVisible = false; // Update the visibility control
+    this.errorMessageVisible = false; 
   }
 
   }
@@ -104,15 +103,15 @@ export default {
 <style scoped>
 
 .flyout {
-    position: fixed; /* Keeps the flyout in the same place even when scrolling */
-    top: 10%;       /* Position the top edge of the element in the middle of the screen vertically */
-    left: 50%;      /* Position the left edge of the element in the middle of the screen horizontally */
-    transform: translate(-50%, -50%); /* Shift the element left and up by half its width and height to center it */
+    position: fixed;
+    top: 10%;       
+    left: 50%;      
+    transform: translate(-50%, -50%);
     background-color: red;
     color: white;
     padding: 10px;
     border-radius: 5px;
-    z-index: 1000;  /* Ensures the flyout appears above other content; adjust as necessary */
+    z-index: 1000;  
 }
 .btn {
   font-family: 'Daydream', sans-serif;

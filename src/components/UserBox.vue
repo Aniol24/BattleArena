@@ -61,7 +61,6 @@ import * as store from '../store.js';
 export default {
   data() {
     let initialUserData = store.getUserData();
-    // Initialize games_won and games_lost if they don't exist in userData
     initialUserData.games_won = initialUserData.games_won || 0;
     initialUserData.games_lost = initialUserData.games_lost || 0;
     return {
@@ -108,12 +107,12 @@ export default {
     },
 
     getStatistics(){
-      fetch('https://balandrau.salle.url.edu/i3/players/' + this.userData.username + "/statistics", {
+      fetch('https://balandrau.salle.url.edu/i3/players/statistics', {
         method: 'GET',
         headers: {
-          'Bearer':store.getUserToken(),
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
       })
       .then(response => {
         if (!response.ok) {
@@ -121,19 +120,23 @@ export default {
             throw new Error(err.error.message); 
           });
         } else {
-          console.log(response.json());
           return response.json();
         }
-      })
+      })  
       .then(data => {
-        
         this.userData.games_won = data.games_won;
         this.userData.games_lost = data.games_played - data.games_won;
+        console.log(this.players);
       })
       .catch(error => {
-        console.error("Error fetching statistics:", error.message);
+        this.loginError = 'Error ' + error.message; 
       });
+    },
+
+    handleSearch(query) {
+      this.searchQuery = query;
     }
+    
   }
 };
 </script>

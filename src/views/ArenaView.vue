@@ -67,7 +67,6 @@ export default {
   },
   mounted() {
 
-    this.leaveArena();
     var modal = document.getElementById("arenaModal");
     var btn = document.getElementById("createArenaBtn");
     var span = document.getElementsByClassName("close")[0];
@@ -129,51 +128,16 @@ export default {
       .then(data => {
         if (data) {
           console.log(data);
-          this.createSuccess = "Arena created successfully!"; // Set success message for JSON response
+          this.createSuccess = "Arena created successfully!"; 
           this.createError = '';
           this.$router.push('/battlearena');
         }
       })
       .catch(error => {
         this.createError =  error.message;
-        this.createSuccess = ''; // Clear success message in case of error
+        this.createSuccess = ''; 
       });
     },
-    leaveArena(){
-
-      fetch('https://balandrau.salle.url.edu/i3/arenas/aadads/play', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Bearer': store.getUserToken()
-        }
-      })
-      .then(response => {
-        if (response.ok || response.status === 201) { 
-          console.log(response);
-          if (response.headers.get("Content-Length") === "0" || !response.headers.get("content-type")?.includes("application/json")) {
-            this.$router.push('/arena');
-            return;
-          } else {
-            return response.json();
-          }
-        } else {
-          return response.json().then(err => {
-            throw new Error(err.error.message); 
-          });
-        }
-      })
-      .then(data => {
-        if (data) {
-          this.createSuccess = "Arena created successfully!"; // Set success message for JSON response
-        }
-      })
-      .catch(error => {
-        this.createError =  error.message;
-        this.createSuccess = ''; // Clear success message in case of error
-      });
-
-    }
 
   }
   
