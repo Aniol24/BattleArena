@@ -5,7 +5,7 @@
 
       <div class="stats-atac">
         <h4>Health: {{ HP_max }} HP</h4>
-        <h4>{{ players_games[0] ? players_games[0].player_ID : '???' }} VS {{ players_games[1] ? players_games[1].player_ID : '???' }}</h4>
+        <h4>{{  players_games ? players_games[0] ? players_games[0].player_ID : '???' : ""}} VS {{ players_games ? players_games[1] ? players_games[1].player_ID : '???' : ""}}</h4>
       </div>
 
       <div class="stats-atac">

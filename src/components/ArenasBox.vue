@@ -32,17 +32,21 @@ export default {
     };
   },
   mounted() {
-    this.getAttacks();
+    this.getArenas();
   },
   computed: {
     filteredArenas() {
-      return this.arenas.filter(arena => 
-        arena.game_ID.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
+      if(this.searchQuery === ''){
+        return this.arenas;
+      }else{
+        return this.arenas.filter(arena => 
+          arena.game_ID.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
     }
   },
   methods: {
-    getAttacks() {
+    getArenas() {
       fetch('https://balandrau.salle.url.edu/i3/arenas', {
         method: 'GET',
         headers: {
@@ -60,14 +64,14 @@ export default {
         }
       })  
       .then(data => {
+        console.info(data);
         this.arenas = data;
       })
       .catch(error => {
         this.loginError = 'Error: ' + error.message; 
       });
+    }
   }
-}
-
 };
 </script>
 

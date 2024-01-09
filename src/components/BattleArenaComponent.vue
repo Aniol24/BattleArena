@@ -21,7 +21,7 @@ export default {
     this.getGame();
     this.gameInterval = setInterval(() => {
       this.getGame();
-    }, 500); 
+    }, 5000); 
   },
   props: {
     size: Number,

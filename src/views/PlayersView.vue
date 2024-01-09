@@ -71,6 +71,15 @@ export default {
       .then(data => {
         this.players = data;
         console.log(this.players);
+        
+        //function image uri malformation regx validation
+        const regx = new RegExp('^(http|https)://', 'i');
+        this.players.forEach(player => {
+          if(!regx.test(player.img)){
+            console.error(player.img + ' is not a valid image uri')
+            player.img = 'https://cdn-icons-png.flaticon.com/512/21/21104.png';
+          }
+        });
       })
       .catch(error => {
         this.loginError = 'Login Failed: ' + error.message; 
