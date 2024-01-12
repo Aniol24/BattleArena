@@ -53,7 +53,6 @@ export default {
       })  
       .then(data => {
         this.attacks = data;
-        console.log(this.attacks); 
       })
       .catch(error => {
         this.loginError = 'Error: ' + error.message; 

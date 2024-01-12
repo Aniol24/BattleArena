@@ -1,7 +1,7 @@
 <template>
   <div class="button-container">
     <button class="btn" id="createAttackBtn">Create Attack</button>
-    <button class="btn">Sell Attack</button>
+    <button class="btn" id="sellAttackBtn">Sell Attack</button>
   </div>
 
   <div id="attackModal" class="modal">
@@ -26,6 +26,24 @@
     </div>
   </div>
 
+  <div id="sellModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h4 class="titol">SELL ATTACK</h4>
+      <div class="attacks-list">
+        <ul>
+          <li v-for="attack in myAttacks" :key="attack.id">
+            {{ attack.attack_ID }}, Power: {{ attack.power }}
+            <!--input to add the price-->
+            <input type="text" placeholder="Price..." style="max-width: fit-content;"/>
+            <!--button to sell the attack-->
+            <button class="small-sell-button" style="max-width: fit-content;">sell</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -36,7 +54,8 @@ export default {
   data() {
     return {
       createError: '',
-      createSuccess: ''
+      createSuccess: '',
+      myAttacks: []
     };
   },
   mounted() {
@@ -44,21 +63,50 @@ export default {
     var btn = document.getElementById("createAttackBtn");
     var span = document.getElementsByClassName("close")[0];
 
-    btn.onclick = function() {
+    btn.onclick = () => {
       modal.style.display = "block";
-      modal.classList.add("modal-open"); 
+      modal.classList.add("modal-open");
+      this.createError = '';
+      this.createSuccess = '';
     }
 
-    span.onclick = function() {
+    span.onclick = () => {
       modal.style.display = "none";
-      modal.classList.remove("modal-open"); 
+      modal.classList.remove("modal-open");
+      this.createError = '';
+      this.createSuccess = '';
     }
 
-    window.onclick = function(event) {
+    window.onclick = (event) => {
       if (event.target == modal) {
         modal.style.display = "none";
         modal.classList.remove("modal-open");
+        this.createError = '';
+        this.createSuccess = '';
       }
+      if (event.target == modal2) {
+        modal2.style.display = "none";
+        modal2.classList.remove("modal-open");
+        this.createError = '';
+        this.createSuccess = '';
+      }
+    }
+
+    var modal2 = document.getElementById("sellModal");
+    var btn2 = document.getElementById("sellAttackBtn");
+    var span2 = document.getElementsByClassName("close")[1];
+
+    btn2.onclick = () => {
+      modal2.style.display = "block";
+      modal2.classList.add("modal-open");
+      this.getAttacks();
+    }
+
+    span2.onclick = () => {
+      modal2.style.display = "none";
+      modal2.classList.remove("modal-open");
+      this.createError = '';
+      this.createSuccess = '';
     }
   },
   methods: {
@@ -80,7 +128,73 @@ export default {
       })
       .then(response => {
         if (response.ok || response.status === 201) { 
-          console.log(response);
+          if (response.headers.get("Content-Length") === "0" || !response.headers.get("content-type")?.includes("application/json")) {
+            this.createSuccess = "Attack created successfully!";
+            this.createError = " "
+            return;
+          } else {
+            return response.json();
+          }
+        } else {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        }
+      })
+      .then(data => {
+        if (data) {
+          this.createSuccess = "Attack created successfully!"; 
+          this.createError = "";
+        }
+      })
+      .catch(error => {
+        this.createError =  error.message;
+        this.createSuccess = "";
+      });
+    },
+
+    getAttacks() {
+      fetch('https://balandrau.salle.url.edu/i3/players/attacks', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          return response.json();
+        }
+      })  
+      .then(data => {
+        this.myAttacks = data;
+      })
+      .catch(error => {
+        this.loginError = 'Login Failed: ' + error.message; 
+      });
+    },
+
+    sellAttack() {
+      const requestBody = {
+        attack_ID: document.getElementById("attack_id").value,
+        positions: document.getElementById("positions").value,
+        img: "https://cdn-icons-png.flaticon.com/128/842/842082.png"
+      };
+
+      fetch('https://balandrau.salle.url.edu/i3/shop/attacks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer': store.getUserToken()
+        },
+        body: JSON.stringify(requestBody)
+      })
+      .then(response => {
+        if (response.ok || response.status === 201) { 
           if (response.headers.get("Content-Length") === "0" || !response.headers.get("content-type")?.includes("application/json")) {
             this.createSuccess = "Attack created successfully!"; // Set success message for empty response
             return;
@@ -95,7 +209,6 @@ export default {
       })
       .then(data => {
         if (data) {
-          console.log(data);
           this.createSuccess = "Attack created successfully!"; // Set success message for JSON response
         }
       })
@@ -155,10 +268,35 @@ export default {
   top: 0;
   width: 100%; 
   height: 100%; 
-  overflow: auto; 
   background-color: rgb(0,0,0); 
   background-color: rgba(0,0,0,0.4); 
 }
+
+.attacks-list {
+  max-height: 300px; /* Set a maximum height for the attacks list */
+  overflow-y: auto; /* Enable vertical scroll if content exceeds max-height */
+  margin-bottom: 20px; /* Optional: Add some margin at the bottom */
+}
+
+.attacks-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.attacks-list::-webkit-scrollbar-track {
+  background: #dde5b6;
+  border-radius: 10px;
+}
+
+.attacks-list::-webkit-scrollbar-thumb {
+  background-color: #dde5b6;
+  border-radius: 20px;
+  border: 3px solid #507229;
+}
+
+.attacks-list::-webkit-scrollbar-thumb:hover {
+  background-color: #dde5b6;
+}
+
 
 .modal-content {
   border: #57473d 2px solid;
@@ -167,7 +305,7 @@ export default {
   margin: 15% auto; 
   padding: 20px;
   border: 1px solid #888;
-  width: 500px; 
+  width: 550px; 
   font-family: 'DigitalDisco', sans-serif;
 }
 
@@ -235,5 +373,21 @@ button {
 
 button:hover {
   background-color: #32471a;
+}
+
+.small-sell-button {
+  padding: 5px 10px; /* Smaller padding */
+  font-size: 12px; /* Smaller font size */
+  background-color: #507229; /* Background color */
+  color: #dde5b6; /* Text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  margin-left: 10px;
+}
+
+.small-sell-button:hover {
+  background-color: #32471a; /* Darker background on hover */
 }
 </style>
