@@ -12,7 +12,7 @@ import Attack from './AttackComponent.vue'
         :power="attack.power"
         :positions="attack.positions"
         :equiped="attack.equipped"
-        :onSale="attack.on_sale" />
+        :on_sale="attack.on_sale" />
     </div>
   </div>
 </template>
@@ -33,6 +33,7 @@ export default {
     this.getAttacks();
   },
   methods: {
+    
     getAttacks() {
       fetch('https://balandrau.salle.url.edu/i3/players/attacks', {
         method: 'GET',
@@ -47,13 +48,12 @@ export default {
             throw new Error(err.error.message); 
           });
         } else {
-          //console.log(response.json());
           return response.json();
         }
       })  
       .then(data => {
         this.attacks = data;
-        console.log(this.attacks); // Add this line to check the data
+        console.log(this.attacks); 
       })
       .catch(error => {
         this.loginError = 'Login Failed: ' + error.message; 

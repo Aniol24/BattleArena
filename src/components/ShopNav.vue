@@ -30,14 +30,16 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <h4 class="titol">SELL ATTACK</h4>
+      <p v-if="sellError" class="create-error">{{ sellError }}</p>
+      <p v-if="sellSuccess" class="create-success">{{ sellSuccess }}</p>
       <div class="attacks-list">
         <ul>
-          <li v-for="attack in myAttacks" :key="attack.id">
-            {{ attack.attack_ID }}, Power: {{ attack.power }}
-            <!--input to add the price-->
-            <input type="text" placeholder="Price..." style="max-width: fit-content;"/>
-            <!--button to sell the attack-->
-            <button class="small-sell-button" style="max-width: fit-content;">sell</button>
+          <li v-for="attack in filteredAttacks" :key="attack.id">
+            <form @submit.prevent="sellAttack(attack)">
+              {{ attack.attack_ID }}, Power: {{ attack.power }}
+              <input type="text" placeholder="Price..." v-model="attack.price" style="max-width: fit-content;"/>
+              <button type="submit" class="small-sell-button" style="max-width: fit-content;">Sell</button>
+            </form>
           </li>
         </ul>
       </div>
@@ -55,8 +57,16 @@ export default {
     return {
       createError: '',
       createSuccess: '',
+      sellSuccess: '',
+      sellError: '',
+      price: '',
       myAttacks: []
     };
+  },
+  computed: {
+    filteredAttacks() {
+      return this.myAttacks.filter(attack => !attack.on_sale);
+    }
   },
   mounted() {
     var modal = document.getElementById("attackModal");
@@ -171,21 +181,21 @@ export default {
         }
       })  
       .then(data => {
-        this.myAttacks = data;
+        this.myAttacks = data.map(attack => ({ ...attack, price: '' }));
+        console.log(this.myAttacks);
       })
       .catch(error => {
         this.loginError = 'Login Failed: ' + error.message; 
       });
     },
 
-    sellAttack() {
-      const requestBody = {
-        attack_ID: document.getElementById("attack_id").value,
-        positions: document.getElementById("positions").value,
-        img: "https://cdn-icons-png.flaticon.com/128/842/842082.png"
-      };
+    sellAttack(attack) {
 
-      fetch('https://balandrau.salle.url.edu/i3/shop/attacks', {
+      const requestBody = {
+        price: Number(attack.price)
+      };
+    
+      fetch('https://balandrau.salle.url.edu/i3/shop/attacks/' + attack.attack_ID + '/sell', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -194,14 +204,16 @@ export default {
         body: JSON.stringify(requestBody)
       })
       .then(response => {
-        if (response.ok || response.status === 201) { 
+        if (response.ok || response.status === 200) { 
           if (response.headers.get("Content-Length") === "0" || !response.headers.get("content-type")?.includes("application/json")) {
-            this.createSuccess = "Attack created successfully!"; // Set success message for empty response
+            this.sellSuccess = "Attack put to sell!"; 
+            this.getAttacks();
             return;
           } else {
             return response.json();
           }
         } else {
+          console.log(this.price);
           return response.json().then(err => {
             throw new Error(err.error.message); 
           });
@@ -209,12 +221,14 @@ export default {
       })
       .then(data => {
         if (data) {
-          this.createSuccess = "Attack created successfully!"; // Set success message for JSON response
+          this.sellSuccess = "Attack put to sell!";
+          this.getAttacks();
+          this.filteredAttacks();
         }
       })
       .catch(error => {
-        this.createError =  error.message;
-        this.createSuccess = ''; // Clear success message in case of error
+        this.sellError =  error.message;
+        this.sellSuccess = ''; 
       });
     }
   }
