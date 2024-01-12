@@ -58,12 +58,10 @@ export default {
         } else {
           console.log(response);
           this.$refs.toast.showToast('Attack bought', 'success');
-          //return response.json();
         }
       })  
       .then(data => {
         console.log(data);
-        //this.$refs.toast.showToast('Attack bought', 'success');
       })
       .catch(error => {
         this.loginError = 'Error: ' + error.message; 

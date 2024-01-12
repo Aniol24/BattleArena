@@ -148,7 +148,7 @@ export default {
 }
 
 .stats-atac{
-  min-width: 200px;
+  min-width: 300px;
 }
 
 .contingut-atac {

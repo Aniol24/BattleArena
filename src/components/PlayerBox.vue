@@ -10,6 +10,7 @@
       <div class="container-files">
         <h4>{{ name }}</h4>
         <h4>lvl: {{ level }} </h4>
+        <h4>xp: {{ xp }} </h4>
         <h4>Gold: {{ coins }}</h4>
       </div>
     </div>
@@ -54,7 +55,7 @@ export default {
 
 .box {
   font-family: 'DigitalDisco', sans-serif;
-  width: 300px;
+  width: 350px;
   padding: 10px;
   background-color: #dde5b6;
   border-radius: 30px;
@@ -65,6 +66,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: start;
+  align-items: center; 
 }
 
 @media (max-width: 600px) {

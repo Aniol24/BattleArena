@@ -36,7 +36,7 @@ export default {
   computed: {
     filteredPlayers() {
     return this.players.map(player => {
-      const cleanedName = player.player_ID.replace(/[!*#@{}:+.,_%([$-;=?)\]]/g, ''); // Replace invalid characters including "]"
+      const cleanedName = player.player_ID.replace(/[\]]/g, ''); // Replace invalid characters including "]"
       return {
         ...player,
         player_ID: cleanedName
