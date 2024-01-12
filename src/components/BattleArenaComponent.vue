@@ -145,13 +145,11 @@ export default {
   border-radius: 50%;
 }
 
-/* Position the direction ball based on Player 1's facing direction */
 .player1-up .direction-ball { top: -5px; left: 50%; transform: translateX(-50%); }
 .player1-down .direction-ball { bottom: -5px; left: 50%; transform: translateX(-50%); }
 .player1-left .direction-ball { left: -5px; top: 50%; transform: translateY(-50%); }
 .player1-right .direction-ball { right: -5px; top: 50%; transform: translateY(-50%); }
 
-/* Position the direction ball based on Player 2's facing direction */
 .player2-up .direction-ball { top: -5px; left: 50%; transform: translateX(-50%); }
 .player2-down .direction-ball { bottom: -5px; left: 50%; transform: translateX(-50%); }
 .player2-left .direction-ball { left: -5px; top: 50%; transform: translateY(-50%); }
@@ -167,7 +165,7 @@ export default {
 }
 
 .player2-position {
-  background-color: green; /* Adjust color for Player 2 */
+  background-color: green; 
 }
 
 .arena {
