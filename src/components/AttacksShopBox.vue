@@ -7,6 +7,7 @@ import Attack from './AttackShopComp.vue'
     <h3 class="title">Attacks</h3>
 
     <div class="caixa-atacs">
+      
       <Attack v-for="attack in attacks" :key="attack.attack_ID"
         :name="attack.attack_ID"
         :power="attack.power"

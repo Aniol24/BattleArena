@@ -1,3 +1,7 @@
+<script setup>
+import Toast from './ShowToast.vue';
+</script>
+
 <template>
   <div class="attack">
     <div class="contingut-atac">
@@ -18,9 +22,13 @@
       </div>
     </div>
   </div>
+
+  <Toast ref="toast" />
 </template>
 
 <script>
+
+import * as store from '../store.js';
 
 export default {
   props: {
@@ -30,6 +38,39 @@ export default {
     levelNeeded: Number,
     on_sale: Boolean,
     price: Number
+  },
+
+  methods: {
+
+    buyAttack(){
+      fetch('https://balandrau.salle.url.edu/i3/shop/attacks/' + this.name + '/buy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          console.log(response);
+          this.$refs.toast.showToast('Attack bought', 'success');
+          //return response.json();
+        }
+      })  
+      .then(data => {
+        console.log(data);
+        //this.$refs.toast.showToast('Attack bought', 'success');
+      })
+      .catch(error => {
+        this.loginError = 'Error: ' + error.message; 
+        this.$refs.toast.showToast(error.message, 'error');
+      });
+    }
+
   }
 };
 
