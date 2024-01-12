@@ -1,3 +1,7 @@
+<script setup>
+import Toast from './ShowToast.vue';
+</script>
+
 <template>
   <div class="attack">
     <div class="contingut-atac">
@@ -12,11 +16,29 @@
         <h4>Equiped: {{ equipped ? 'Yes' : 'No' }}</h4>
         <h4>On Sale: {{ on_sale ? 'Yes' : 'No' }}</h4>
       </div>
+
+      <!--Equip attack button-->
+      <button
+        v-if="!equipped"
+        class="btn"
+        @click="equipAttack"
+      >Equip</button>
+
+      <button
+        v-if="equipped"
+        class="btn"
+        @click="unequipAttack"
+      >Unequip</button>
+
+
     </div>
   </div>
+  <Toast ref="toast" />
 </template>
 
 <script>
+import * as store from '../store.js';
+
 export default {
   props: {
     name: String,
@@ -24,6 +46,63 @@ export default {
     positions: String,
     equipped: Boolean,
     on_sale: Boolean
+  },
+  methods:{
+    equipAttack(){
+      fetch('https://balandrau.salle.url.edu/i3/players/attacks/' + this.name, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          //console.log(response);
+          //this.$refs.toast.showToast('Equipation succeded', 'success');
+          this.$emit('update-attacks');
+        }
+      })  
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        this.loginError = 'Error: ' + error.message; 
+        this.$refs.toast.showToast(error.message, 'error');
+      });
+    },
+
+    unequipAttack(){
+      fetch('https://balandrau.salle.url.edu/i3/players/attacks/' + this.name, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          //console.log(response);
+          //this.$refs.toast.showToast('Enequipation succeded', 'success');
+          this.$emit('update-attacks');
+        }
+      })  
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        this.loginError = 'Error: ' + error.message; 
+        this.$refs.toast.showToast(error.message, 'error');
+      });
+    }
   }
 };
 </script>
@@ -31,7 +110,7 @@ export default {
 <style scoped>
 .title {
   margin-left: 50px;
-  min-width: 400px;
+  min-width: 350px;
   font-family: 'Daydream';
 }
 
@@ -55,6 +134,23 @@ export default {
 
 .stats-atac{
   min-width: 200px;
+}
+
+.btn {
+  font-family: 'Daydream', sans-serif;
+  width: 150px;
+  padding: 10px;
+  background-color: #6c584c;
+  color: #dde5b6;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.8s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #57473d;
 }
 
 @media (max-width: 600px) {

@@ -11,8 +11,9 @@ import Attack from './AttackComponent.vue'
         :name="attack.attack_ID"
         :power="attack.power"
         :positions="attack.positions"
-        :equiped="attack.equipped"
-        :on_sale="attack.on_sale" />
+        :equipped="attack.equipped"
+        :on_sale="attack.on_sale" 
+        @update-attacks="getAttacks"/>
     </div>
   </div>
 </template>
@@ -53,46 +54,11 @@ export default {
       })  
       .then(data => {
         this.attacks = data;
-        console.log(this.attacks); 
+        //console.log(this.attacks); 
       })
       .catch(error => {
         this.loginError = 'Login Failed: ' + error.message; 
       });
-    },
-    
-    createAttack(){
-      const requestBody = {
-        attack_ID: "atac, prova",
-        positions: "(4,1)",
-        img: "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/9720e55c-d222-4769-90b8-aec2262c0988/ddvtmz1-cadfaa7f-6da9-4b59-a0fe-6ed5742af38c.jpg/v1/fill/w_622,h_350,q_70,strp/bruh_by_jukeboxfromao_ddvtmz1-350t.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6IlwvZlwvOTcyMGU1NWMtZDIyMi00NzY5LTkwYjgtYWVjMjI2MmMwOTg4XC9kZHZ0bXoxLWNhZGZhYTdmLTZkYTktNGI1OS1hMGZlLTZlZDU3NDJhZjM4Yy5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.OTeZgFcV45DZqyg43rAeGzSld3mOIMTCffVyi3SGM8o"
-      };
-
-      fetch('https://balandrau.salle.url.edu/i3/shop/attacks', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Bearer':store.getUserToken()
-        },
-        body: JSON.stringify(requestBody)
-      })
-      .then(response => {
-        if (!response.ok) {
-          return response.json().then(err => {
-            throw new Error(err.error.message); 
-          });
-        } else {
-          console.log(response.json());
-          return response.json();
-        }
-      })
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        this.loginError = 'Login Failed: ' + error.message; 
-      });
-
-
     }
   }
 
