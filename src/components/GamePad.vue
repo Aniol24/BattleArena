@@ -10,16 +10,13 @@ import Attack from './AttackInGame.vue'
         <p @click="leaveArena" style="cursor: pointer;">leave arena</p>
       </div>
 
-      <div class="line">
-        <Attack />
-      </div>
-
-      <div class="line">
-        <Attack />
-      </div>
-
-      <div class="line">
-        <Attack />
+      <div v-for="attack in attacks" :key="attack.id" :v-if="attack.equipped" class="line">
+        <Attack
+          :name="attack.attack_ID"
+          :power="attack.power"
+          :positions="attack.positions"
+          @update-attacks="getAttacks"
+        />
       </div>
     </div>
 
@@ -57,6 +54,14 @@ export default {
 
   props: {
     game_ID: String,
+  },
+  data() {
+    return {
+      attacks: [] 
+    };
+  },
+  mounted() {
+    this.getAttacks();
   },
   methods: {
     leaveArena(){
@@ -124,7 +129,31 @@ export default {
       });
     },
 
-    
+    getAttacks() {
+      fetch('https://balandrau.salle.url.edu/i3/players/attacks', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          return response.json();
+        }
+      })  
+      .then(data => {
+        this.attacks = data.filter(attack => attack.equipped);
+        //console.log(this.attacks); 
+      })
+      .catch(error => {
+        this.loginError = 'Login Failed: ' + error.message; 
+      });
+    }
   }
 }
 
