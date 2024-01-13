@@ -8,7 +8,7 @@
         <h4>{{  players_games ? players_games[0] ? players_games[0].player_ID : '???' : ""}} VS {{ players_games ? players_games[1] ? players_games[1].player_ID : '???' : ""}}</h4>
       </div>
 
-      <div class="stats-atac">
+      <div class="stats-atac-2">
         <h4>Size: {{ size }}</h4>
         <h4>{{ finished ? 'Finished' : 'Not Finished' }}</h4>
       </div>
@@ -16,6 +16,21 @@
       <div>
         <button  class="btn" @click="joinArena">Join</button>
       </div>
+      <div v-if="finished">
+      <button class="btn log-btn" @click="showLog">Log</button>
+    </div>
+    </div>
+  </div>
+
+  <div v-if="isModalVisible" class="modal">
+    <div class="modal-content">
+      <span class="close" @click="closeModal">&times;</span>
+      <h4 class="titol">LOGS</h4>
+      <div class="logs">
+        <div v-for="log in logs" :key="log">
+          <h4>{{'- ' + log.description }}</h4>
+        </div>
+      </div>      
     </div>
   </div>
 
@@ -40,8 +55,10 @@ export default {
   },
   data() {
     return {
+      logs: [],
       errorMessage: '', 
       errorMessageVisible: false,
+      isModalVisible: false,
     };
   },
   methods: {
@@ -88,12 +105,50 @@ export default {
     setTimeout(() => {
       this.hideErrorFlyout();
     }, 2000);
-  },
 
-  hideErrorFlyout() {
+    
+    },
 
-    this.errorMessageVisible = false; 
-  }
+    hideErrorFlyout() {
+
+      this.errorMessageVisible = false; 
+    },
+
+    showLog() {
+
+      this.getGameLogs();
+
+      this.isModalVisible = true;
+    },
+
+    closeModal() {
+      this.isModalVisible = false;
+    },
+
+    getGameLogs(){
+      fetch('https://balandrau.salle.url.edu/i3/arenas/' + this.name + '/logs', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          return response.json();
+        }
+      })  
+      .then(data => {
+        this.logs = data;
+      })
+      .catch(error => {
+        this.loginError = 'Error: ' + error.message; 
+      });
+    }
 
   }
 };
@@ -101,6 +156,80 @@ export default {
 </script>
 
 <style scoped>
+
+.titol {
+  font-family: 'Daydream', sans-serif;
+  text-align: center;
+  color: #283618;
+}
+
+.logs {
+  max-height: 300px; /* Set a maximum height for the attacks list */
+  overflow-y: auto; /* Enable vertical scroll if content exceeds max-height */
+  margin-bottom: 20px;
+  margin-top: 20px; /* Optional: Add some margin at the bottom */
+}
+
+.logs::-webkit-scrollbar {
+  width: 10px;
+}
+
+.logs::-webkit-scrollbar-track {
+  background: #dde5b6;
+  border-radius: 10px;
+}
+
+.logs::-webkit-scrollbar-thumb {
+  background-color: #dde5b6;
+  border-radius: 20px;
+  border: 3px solid #507229;
+}
+
+.logs::-webkit-scrollbar-thumb:hover {
+  background-color: #dde5b6;
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.modal-content {
+  border: #57473d 2px solid;
+  border-radius: 25px;
+  background-color: #dde5b6;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 550px; 
+  font-family: 'DigitalDisco', sans-serif;
+}
+
+.modal-open {
+  animation: fadeIn 0.5s;
+}
+
+.modal {
+  display: block; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
 
 .flyout {
     position: fixed;
@@ -123,6 +252,7 @@ export default {
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  margin-right: 10px;
   transition: background-color 0.8s ease-in-out;
 }
 
@@ -151,6 +281,10 @@ export default {
   min-width: 300px;
 }
 
+.stats-atac-2{
+  min-width: 150px;
+}
+
 .contingut-atac {
   display: flex;
   flex-direction: row;
@@ -163,6 +297,8 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+
+
 
 @media (max-width: 768px) {
   .contingut-atac {
