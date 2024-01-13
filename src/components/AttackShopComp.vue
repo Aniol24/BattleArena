@@ -57,6 +57,7 @@ export default {
           });
         } else {
           console.log(response);
+          this.$emit('update-attacks');
           this.$refs.toast.showToast('Attack bought', 'success');
         }
       })  

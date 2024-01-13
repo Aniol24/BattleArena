@@ -28,8 +28,8 @@
 
     <div class="contenidor-centrat">
       <div class="experience-bar">
-        <div class="progress" :style="{ width: userData.xp + '%' }">
-          <span>{{ userData.xp }}</span>
+        <div class="progress" :style="{ width: '100%'}">
+          <span>{{ userData.xp + ' XP'}}</span>
         </div>
       </div>
     </div>

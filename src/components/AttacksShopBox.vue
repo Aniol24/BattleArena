@@ -14,7 +14,8 @@ import Attack from './AttackShopComp.vue'
         :positions="attack.positions"
         :onSale="attack.on_sale" 
         :levelNeeded="attack.level_needed"
-        :price="attack.price"/>
+        :price="attack.price"
+        @update-attacks="getAttacks"/>
     </div>
   </div>
 </template>
@@ -59,6 +60,7 @@ export default {
         this.loginError = 'Error: ' + error.message; 
       });
     },
+
   },
 };
 
