@@ -9,13 +9,13 @@ import Arenas from '../components/ArenasBox.vue'
     <NavBar />
     <div class="contenidor-start">
       <SearchBar @search="handleSearch" />
-      <button class="filter">Open Arenas</button>
-      <button class="filter">Finished Arenas</button>
-      <button class="filter">Time</button>
+      <label class="filter-checkbox">
+        <input type="checkbox" v-model="filters.openArenas"> Available Arenas
+      </label>
     </div>
 
     <div class="contenidor-centrat">
-      <Arenas :searchQuery="searchQuery" />
+      <Arenas :searchQuery="searchQuery" :openArenas="filters.openArenas" />
     </div>
     <div class="create">
       <button id="createArenaBtn" class="button">+Create Arena</button>
@@ -62,7 +62,10 @@ export default {
     return {
       searchQuery: '',
       createSuccess: '',
-      createError: ''
+      createError: '',
+      filters: {
+        openArenas: false,
+      }
     };
   },
   mounted() {
@@ -146,6 +149,29 @@ export default {
 </script>
 
 <style scoped>
+
+.filter-checkbox {
+  font-family: 'Daydream', sans-serif;
+  margin-left: 10px;
+  padding: 10px;
+  background-color: #dde5b6;
+  color: #6c584c;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+}
+
+.filter-checkbox input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.filter-checkbox:hover {
+  background-color: #f3ffb1;
+}
 
 .create-error {
   color: red;

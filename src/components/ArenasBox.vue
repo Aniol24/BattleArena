@@ -5,7 +5,7 @@ import Arena from './ArenaComponent.vue'
 <template>
   <div class="box">
     <div class="caixa-atacs">
-      <Arena v-for="arena in filteredArenas" :key="arena.id"
+      <Arena v-for="arena in filteredArenas" :key="arena.id" 
         :name="arena.game_ID"
         :size="arena.size"
         :creation_date="arena.creation_date"
@@ -23,8 +23,10 @@ import * as store from '../store.js';
 
 export default {
   props: {
-    searchQuery: String
+    searchQuery: String,
+    openArenas: Boolean
   },
+  
   data() {
     return {
       userData: store.getUserData(),
@@ -36,13 +38,23 @@ export default {
   },
   computed: {
     filteredArenas() {
-      if(this.searchQuery === ''){
-        return this.arenas;
-      }else{
-        return this.arenas.filter(arena => 
+      let arenas = this.arenas;
+
+      // Apply search query filter
+      if (this.searchQuery !== '') {
+        arenas = arenas.filter(arena =>
           arena.game_ID.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }
+
+      // Filter for open arenas if openArenas is true
+      if (this.openArenas) {
+        arenas = arenas.filter(arena => 
+          !arena.finished && !arena.start
+        );
+      }
+
+      return arenas;
     }
   },
   methods: {

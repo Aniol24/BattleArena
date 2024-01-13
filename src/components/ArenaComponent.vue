@@ -164,10 +164,10 @@ export default {
 }
 
 .logs {
-  max-height: 300px; /* Set a maximum height for the attacks list */
-  overflow-y: auto; /* Enable vertical scroll if content exceeds max-height */
+  max-height: 300px;
+  overflow-y: auto; 
   margin-bottom: 20px;
-  margin-top: 20px; /* Optional: Add some margin at the bottom */
+  margin-top: 20px; 
 }
 
 .logs::-webkit-scrollbar {
