@@ -40,14 +40,12 @@ export default {
     filteredArenas() {
       let arenas = this.arenas;
 
-      // Apply search query filter
       if (this.searchQuery !== '') {
         arenas = arenas.filter(arena =>
           arena.game_ID.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }
 
-      // Filter for open arenas if openArenas is true
       if (this.openArenas) {
         arenas = arenas.filter(arena => 
           !arena.finished && !arena.start

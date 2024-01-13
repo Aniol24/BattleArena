@@ -9,6 +9,14 @@
       <div v-if="isPlayerCell(index)" class="direction-ball"></div>
     </div>
   </div>
+
+  <div class="health-display">
+    <div>Blue PLayer Health: {{ player_1.health }}</div>
+  </div>
+  <div class="health-display">
+    <div v-if="player_2_joined">Green Player Health: {{ player_2.health }}</div>
+  </div>
+  
 </template>
 
 
@@ -35,8 +43,8 @@ export default {
       columns: 0,
       game_ID: '',
       finished: false,
-      player_1: {x: 0, y: 0, direction: ''}, 
-      player_2: {x: 0, y: 0, direction: ''}, 
+      player_1: {x: 0, y: 0, direction: '', health: 0}, 
+      player_2: {x: 0, y: 0, direction: '', health: 0}, 
       player_2_joined: false,
     }
   },
@@ -111,12 +119,14 @@ export default {
         this.player_1.x = data[0].players_games[0].x_game + 1;
         this.player_1.y = data[0].players_games[0].y_game + 1;
         this.player_1.direction = data[0].players_games[0].direction;
+        this.player_1.health = data[0].players_games[0].hp;
         
         if (data[0].players_games.length > 1) {
           this.player_2.x = data[0].players_games[1].x_game + 1;
           this.player_2.y = data[0].players_games[1].y_game + 1;
           this.player_2.direction = data[0].players_games[1].direction;
           this.player_2_joined = true; 
+          this.player_2.health = data[0].players_games[1].hp;
         } else {
           this.player_2_joined = false; 
         }
@@ -201,6 +211,13 @@ export default {
 </script>
 
 <style scoped>
+
+.health-display {
+  display: flex;
+  font-family: DigitalDisco, sans-serif;
+  justify-content: space-around;
+  margin-top: 20px;
+}
 
 .direction-ball {
   position: absolute;
