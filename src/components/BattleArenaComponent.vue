@@ -15,12 +15,15 @@
 <script>
 import * as store from '../store.js';
 
+
 export default {
   
   mounted() {
     this.getGame();
     this.gameInterval = setInterval(() => {
+      if(this.finished) clearInterval(this.gameInterval);
       this.getGame();
+      this.getGameByName();
     }, 5000); 
   },
   props: {
@@ -31,6 +34,7 @@ export default {
       rows: 0,
       columns: 0,
       game_ID: '',
+      finished: false,
       player_1: {x: 0, y: 0, direction: ''}, 
       player_2: {x: 0, y: 0, direction: ''}, 
       player_2_joined: false,
@@ -127,6 +131,67 @@ export default {
       const player2Index = this.player_2.y * this.columns + this.player_2.x;
       return index === player1Index || (this.player_2_joined && index === player2Index);
     },
+
+    getLogs(){
+      fetch('https://balandrau.salle.url.edu/i3/arenas/test arena 12/logs', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          return response.json();
+        }
+      })  
+      .then(data => {
+        //this.attacks = data.filter(attack => attack.equipped);
+        console.log(data); 
+      })
+      .catch(error => {
+        this.loginError = 'Login Failed: ' + error.message; 
+      });
+    },
+
+    getGameByName(){
+      fetch('https://balandrau.salle.url.edu/i3/arenas/'+ this.game_ID, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Bearer':store.getUserToken()
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          return response.json().then(err => {
+            throw new Error(err.error.message); 
+          });
+        } else {
+          return response.json();
+        }
+      })  
+      .then(data => {
+        console.log(data); 
+        this.finished = data.finished;
+        if(this.finished){
+          if(data.players_games[0].winner){
+            this.$emit('winner', data.players_games[0].player_ID);
+          } else {
+            this.$emit('winner', data.players_games[1].player_ID);
+          }
+        }
+      })
+      .catch(error => {
+        this.loginError = 'Login Failed: ' + error.message; 
+      });
+    }
+
+
   },
   beforeUnmount() {
     clearInterval(this.gameInterval);

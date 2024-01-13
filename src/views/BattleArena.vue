@@ -7,9 +7,19 @@ import GamePad from '../components/GamePad.vue'
   <div class="display">
     <div class="arena-container">
       <h2 class="arena-title">{{ game_ID }}</h2>
-      <Arena :size="size"/>
+      <Arena 
+      :size="size" 
+      @winner="handleWinner"/>
     </div>
     <GamePad :game_ID="game_ID" />
+  </div>
+
+  <div v-if="showModal" class="modal">
+    <div class="modal-content">
+      <h3>Winner</h3>
+      <p>{{ winnerName }}</p>
+      <button class="btn" @click="closeModal">OK</button>
+    </div>
   </div>
 </template>
 
@@ -21,6 +31,8 @@ export default {
   data() {
     return {
       game_ID: '', 
+      showModal: false,
+      winnerName: '',
       size: 0,
     };
   },
@@ -52,6 +64,15 @@ export default {
       .catch(error => {
         console.log(error);
       });
+    },
+    handleWinner(playerId) {
+      console.log("Winner ID:", playerId);
+      this.winnerName = playerId;
+      this.showModal = true;
+    },
+    closeModal() {
+
+      this.$router.push('/arena');
     }
   }
 }
@@ -78,6 +99,51 @@ export default {
   font-family: 'Daydream';
   color: #283618;
 }
+
+.modal-open {
+  animation: fadeIn 0.5s;
+}
+
+.btn {
+  font-family: 'Daydream', sans-serif;
+  width: 150px;
+  padding: 10px;
+  background-color: #6c584c;
+  color: #dde5b6;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.8s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #57473d;
+}
+
+.modal {
+  display: block;  
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+  border: #57473d 2px solid;
+  border-radius: 25px;
+  background-color: #dde5b6;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 500px; 
+  font-family: 'DigitalDisco', sans-serif;
+}
+
 
 @media (max-width: 768px) {
   .display {
